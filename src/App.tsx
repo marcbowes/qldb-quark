@@ -21,7 +21,7 @@ export enum Theme {
     LIGHT, DARK
 }
 
-export let CurrentTheme: Theme = Theme.LIGHT
+export let CurrentTheme: Theme = Theme.DARK
 export function toggleTheme() { CurrentTheme == Theme.LIGHT ? CurrentTheme = Theme.DARK : CurrentTheme = Theme.LIGHT }
 
 export enum TabType {
@@ -65,12 +65,51 @@ const theme = createMuiTheme({
     },
 });
 
+const darkTheme = createMuiTheme({
+    palette: {
+        primary: {
+            main: "#ec7211",
+        },
+        secondary: {
+            main: "#545b64",
+        },
+        text: {
+            primary: "#eaeded",
+            secondary: "#aab7b8",
+            disabled: "#545b64",
+        },
+        error: {
+            main: "#d13212",
+        },
+        success: {
+            main: "#1d8102",
+        },
+        background: {
+            default: "#202020",
+            paper: "#202020"
+        },
+        grey: {
+            50: "#fafafa",
+            100: "#f2f3f3",
+            200: "#eaeded",
+            300: "#16191f",
+            400: "#aab7b8",
+            500: "#879596",
+            600: "#687078",
+            700: "#545b64",
+            900: "#16191f",
+        }
+    },
+});
+
+const currentMuiTheme = darkTheme
+
 export enum Color {
     WHITE = "#ffffff",
 }
 
-export const RESULT_BOX_STYLE = {width: "100%", height: "100%", overflow: "scroll", fontSize: "10pt", flex: 1, backgroundColor: theme.palette.background.default};
-export const RESULT_INTERNAL_CONTAINER_STYLE = {width: "100%", maxHeight: 300, overflow: "auto", flex: 1, backgroundColor: theme.palette.background.default};
+export const RESULT_BOX_STYLE = {width: "100%", height: "100%", overflow: "scroll", fontSize: "10pt", flex: 1, backgroundColor: currentMuiTheme.palette.background.default};
+export const RESULT_INTERNAL_CONTAINER_STYLE = {width: "100%", maxHeight: 300, overflow: "auto", flex: 1, backgroundColor: currentMuiTheme.palette.background.default};
 
 const Detail = ({ ledgers, activeLedger }: { ledgers: string[], activeLedger: string}) => {
     const [queryStats, setQueryStats] = React.useState(undefined as QueryStats);
@@ -174,7 +213,7 @@ const App = () => {
     }, [activeLedger])
 
 
-    return <MuiThemeProvider theme={theme}>
+    return <MuiThemeProvider theme={currentMuiTheme}>
         <SplitPane split={"vertical"} size="20%">
             <Navigator ledgerNames={ledgers} setActiveLedger={setActiveLedger}/>
             <Detail ledgers={ledgers} activeLedger={activeLedger}/>

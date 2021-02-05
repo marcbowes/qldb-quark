@@ -43,11 +43,6 @@ body {
   border-color: transparent;
 }
 
-.action-bar {
-  display: inline-flex;
-  padding: 5px 15px;
-}
-
 .action-button {
   display: inline-block;
   margin-top: auto;
@@ -57,24 +52,41 @@ body {
   cursor: pointer;
 }
 
-.action-button:hover {
-  background-color: #d1d1d1;
-}
-
-.status-bar {
-  display: flex;
-  flex-direction: row-reverse;
-  font-family: "Roboto";
-  font-size: 9pt;
-  padding: 2px;
-  align-items: center;
-}
-
-.status-item {
-  padding-right: 2px;
-}
-
 .query-history .MuiTypography-body2 {
   font-family: "Courier New", serif;
   font-size: 8pt;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #202020;
+  border: 1px solid #16191f;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #202020;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #202020;
+}
+::-webkit-scrollbar-track {
+  background: #202020;
+  border: 0px none #16191f;
+  border-radius: 53px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #202020;
+}
+::-webkit-scrollbar-track:active {
+  background: #202020;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

@@ -1,3 +1,4 @@
+import {makeStyles} from "@material-ui/core/styles";
 import * as React from "react";
 import {Color, CurrentTheme, Theme} from "./App";
 import AceEditor from "react-ace";
@@ -5,8 +6,18 @@ import "ace-builds/src-noconflict/mode-sql"
 import "ace-builds/src-noconflict/theme-textmate"
 import "ace-builds/src-noconflict/ext-language_tools"
 import ace from "ace-builds/src-noconflict/ace";
+import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/theme-ambiance";
 import PartiQLMode, {defaultSnippets, Snippets} from "./mode/PartiQLMode";
 import {Button, Divider} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+    actionBar: {
+        backgroundColor: theme.palette.background.default,
+        display: 'inline-flex',
+        padding: "5px 15px",
+    }
+}));
 
 export class Composer extends React.Component<{ composerText: string, executeStatement: (text: string) => void, setComposerText: (text: string) => void }> {
     componentDidMount() {
@@ -43,7 +54,7 @@ export class Composer extends React.Component<{ composerText: string, executeSta
             <AceEditor
                 name={"aceEditor"}
                 mode={"text"} // Just to initialize.. Once loaded it will be updated to PartiQL
-                theme={CurrentTheme == Theme.LIGHT ? "textmate" : "dracula"}
+                theme={CurrentTheme == Theme.LIGHT ? "textmate" : "ambiance"}
                 style={COMPOSER_STYLE}
                 onChange={setComposerText}
                 commands={[executeCode]}
@@ -61,7 +72,8 @@ export class Composer extends React.Component<{ composerText: string, executeSta
 }
 
 const ActionBar = ({executeButtonClicked}: { executeButtonClicked: () => void }) => {
-    return <span className="action-bar">
+    const classes = useStyles();
+    return <span className={classes.actionBar}>
         <Button variant="contained" color="primary" onClick={executeButtonClicked}><GoSvg color={Color.WHITE}/> &nbsp; Run</Button>
     </span>
 }
